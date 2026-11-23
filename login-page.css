@@ -1,0 +1,267 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body{
+    background-color: #f2f6fb;
+    color: #162238;
+}
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.top-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e6ecf4;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #162238;
+}
+
+.logo-image {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: #e7eef6;
+  color: #2f68b8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.logo-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.logo-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.help-link {
+  text-decoration: none;
+  color: #3b7182;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: #3b7182;
+}
+
+.help-link [data-lucide] {
+    width: 16px;
+    color: #3b7182
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
+  padding: 36px 16px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background-color: #ffffff;
+  border: 1px solid #e8eef5;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(22, 34, 56, 0.06);
+  padding: 36px;
+}
+
+.card-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: #e7eef6;
+  color: #2f68b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.card-subtitle {
+  font-size: 0.925rem;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  font-size: 0.925rem;
+  color: #162238;
+  border: 1px solid #d6dfeb;
+  border-radius: 10px;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #2f68b8;
+  box-shadow: 0 0 0 3px rgba(47, 104, 184, 0.14);
+}
+
+.with-left-icon {
+  padding-left: 38px;
+}
+
+.with-right-icon {
+  padding-right: 40px;
+}
+
+.icon-left {
+  position: absolute;
+  left: 12px;
+  color: #8292a6;
+  pointer-events: none;
+}
+
+.icon-right-btn {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #8292a6;
+}
+
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+}
+
+.remember-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.forgot-link,
+.signup-link {
+  color: #2f68b8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgot-link:hover,
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background-color: #2f68b8;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #255599;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #edf1f7;
+  margin: 24px 0 18px;
+}
+
+.signup-text {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* --- Updated Icon Positioning --- */
+
+.icon-left {
+  position: absolute;
+  left: 14px; /* Moved slightly right */
+  top: 50%;
+  transform: translateY(-50%); /* Forces perfect vertical centering */
+  display: flex;
+  align-items: center;
+  color: #8292a6;
+  pointer-events: none;
+}
+
+.icon-right-btn {
+  position: absolute;
+  right: 14px; /* Moved slightly left */
+  top: 50%;
+  transform: translateY(-50%); /* Forces perfect vertical centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #8292a6;
+}
+
+/* Make the icons a tiny bit smaller so they don't look cramped */
+.icon-left svg,
+.icon-right-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Optional: Turns the eye icon slightly darker when you hover over it */
+.icon-right-btn:hover {
+  color: #162238; 
+}
