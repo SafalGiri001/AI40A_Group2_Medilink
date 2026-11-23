@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile | MediLink</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- SIDEBAR-->
+    <aside class="sidebar">
+      <a href="#" class="brand">
+        <img src="Medilink logo.png" alt="MediLink logo" class="brand-logo">
+        <span class="brand-name">MediLink</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+          <span>Home</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="8" width="11" height="13" rx="1"/><path d="M14 12h6a1 1 0 0 1 1 1v8h-7"/><path d="M6 12h2M9 12h2M6 15h2M9 15h2M6 18h2M9 18h2"/><path d="M8.5 3v4M6.5 5h4"/></svg>
+          <span>Find Hospital</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          <span>Nearby Services</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M13 17.5s-2.5-1.6-2.5-3.2a1.4 1.4 0 0 1 2.5-.8 1.4 1.4 0 0 1 2.5.8c0 1.6-2.5 3.2-2.5 3.2z" transform="translate(1.5 -1)"/></svg>
+          <span>My Health Records</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 13.5h.01M12 13.5h.01M16 13.5h.01M8 17h.01M12 17h.01M16 17h.01"/></svg>
+          <span>Appointments</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <svg viewBox="0 0 24 24" class="help-icon"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 19c0 1.5-2 2-4 2"/></svg>
+          <h4>Here to help</h4>
+          <p>Support for your care journey.</p>
+          <a href="#" class="link">Contact support <span aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <a href="#" class="nav-item active">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+          <span>Profile</span>
+        </a>
+        <a href="#" class="nav-item muted">
+          <svg viewBox="0 0 24 24"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/><path d="M16 8l4 4-4 4M20 12H9"/></svg>
+          <span>Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <!--MAIN -->
+    <div class="main">
+
+      <!-- Top bar -->
+      <header class="topbar">
+        <label class="location">
+          <svg viewBox="0 0 24 24" class="loc-icon"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          <select aria-label="Select location">
+            <option>Kathmandu</option>
+            <option>Lalitpur</option>
+            <option>Bhaktapur</option>
+            <option>Pokhara</option>
+          </select>
+        </label>
+
+        <div class="topbar-right">
+          <button class="icon-btn" aria-label="Notifications">
+            <svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21h4"/></svg>
+          </button>
+          <div class="user">
+            <span class="avatar">SG</span>
+            <span class="user-name">Safal Giri</span>
+            <svg viewBox="0 0 24 24" class="chev"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="content">
+        <div class="page-head">
+          <div>
+            <h1>My Profile</h1>
+            <p class="subtitle">Manage your personal information and keep your contact details up to date.</p>
+          </div>
+          <span class="pill pill-secure">Private &amp; secure</span>
+        </div>
+
+        <div class="notice" role="status">
+          <span class="notice-i">i</span>
+          <div>
+            <strong>You have unsaved changes</strong>
+            <p>Review your information, then select Save changes to update your profile.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+
+          <!-- Form card -->
+          <form class="card form-card" action="#" method="post">
+            <h2>Personal information</h2>
+            <p class="hint-top">Fields marked * are required.</p>
+            <hr>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">Full name *</label>
+                <input type="text" id="name" name="name" value="Safal Giri" required>
+              </div>
+
+              <div class="field">
+                <label for="dob">Date of birth</label>
+                <input type="text" id="dob" name="dob" value="15 May 1998">
+                <small>Optional &middot; DD Month YYYY</small>
+              </div>
+
+              <div class="field">
+                <label for="email">Email address *</label>
+                <input type="email" id="email" name="email" value="safal.giri@gmail.com" required>
+                <small>Used for account updates and notifications.</small>
+              </div>
+
+              <div class="field">
+                <label for="phone">Phone number *</label>
+                <input type="tel" id="phone" name="phone" value="+977 9841234567" required>
+                <small>Nepal (+977) &middot; 10-digit mobile number</small>
+              </div>
+
+              <div class="field full">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" value="Baneshwor, Kathmandu, Nepal">
+                <small>Optional &middot; Helps us show services near you.</small>
+              </div>
+            </div>
+
+            <hr class="bottom-rule">
+            <div class="form-actions">
+              <span class="validation-note">Changes are saved after validation.</span>
+              <div class="buttons">
+                <button type="reset" class="btn btn-secondary">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Side column -->
+          <div class="side">
+            <section class="card account-card">
+              <h2>Your account</h2>
+              <h3 class="acc-name">Safal Giri</h3>
+              <p class="acc-email">safal.giri@gmail.com</p>
+              <span class="pill pill-account">Personal account</span>
+              <hr>
+              <h4>Keep your details current</h4>
+              <p class="muted-text">Accurate contact details help you receive appointment reminders and important health updates.</p>
+            </section>
+
+            <section class="card privacy-card">
+              <svg viewBox="0 0 24 24" class="shield"><path d="M12 3 5 6v5.5c0 4.3 2.9 8 7 9.5 4.1-1.5 7-5.2 7-9.5V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg>
+              <h3>Only you can edit your profile</h3>
+              <p class="muted-text">Your personal information stays private. Unauthorized changes are blocked to protect your account.</p>
+              <a href="#" class="link">Need help? Contact support <span aria-hidden="true">&rarr;</span></a>
+            </section>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
