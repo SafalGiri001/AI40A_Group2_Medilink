@@ -7,64 +7,67 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <div class="app">
 
-    <!-- Sidebar -->
+    <!-- ===== Sidebar ===== -->
     <aside class="sidebar">
       <a href="#" class="brand">
-        <img src="Medilink logo.jpg" alt="MediLink logo" class="brand-logo">
+        <img src="medilink logo.png" alt="MediLink logo" class="brand-logo">
         <span class="brand-name">MediLink</span>
       </a>
 
       <nav class="nav" aria-label="Main navigation">
         <a href="#" class="nav-item">
-          <span class="icon icon-home" aria-hidden="true"></span>
+          <i data-lucide="house"></i>
           <span>Home</span>
         </a>
         <a href="#" class="nav-item">
-          <span class="icon icon-hospital" aria-hidden="true"></span>
+          <i data-lucide="hospital"></i>
           <span>Find Hospital</span>
         </a>
         <a href="#" class="nav-item">
-          <span class="icon icon-pin" aria-hidden="true"></span>
+          <i data-lucide="map-pin"></i>
           <span>Nearby Services</span>
         </a>
         <a href="#" class="nav-item">
-          <span class="icon icon-records" aria-hidden="true"></span>
+          <i data-lucide="file-heart"></i>
           <span>My Health Records</span>
         </a>
         <a href="#" class="nav-item">
-          <span class="icon icon-calendar" aria-hidden="true"></span>
+          <i data-lucide="calendar-check"></i>
           <span>Appointments</span>
         </a>
       </nav>
 
       <div class="sidebar-bottom">
         <div class="help-card">
-          <span class="icon icon-support help-icon" aria-hidden="true"></span>
+          <i data-lucide="life-buoy" class="help-icon"></i>
           <h4>Here to help</h4>
           <p>Support for your care journey.</p>
-          <a href="#" class="link">Contact support <span aria-hidden="true">→</span></a>
+          <a href="#" class="link">
+            Contact support <i data-lucide="arrow-right" class="link-icon"></i>
+          </a>
         </div>
 
         <a href="#" class="nav-item active">
-          <span class="icon icon-user" aria-hidden="true"></span>
+          <i data-lucide="user"></i>
           <span>Profile</span>
         </a>
         <a href="#" class="nav-item muted">
-          <span class="icon icon-logout" aria-hidden="true"></span>
+          <i data-lucide="log-out"></i>
           <span>Logout</span>
         </a>
       </div>
     </aside>
 
-    <!-- Main -->
+    <!-- ===== Main area ===== -->
     <div class="main">
 
       <!-- Top bar -->
       <header class="topbar">
         <label class="location">
-          <span class="icon icon-pin loc-icon" aria-hidden="true"></span>
+          <i data-lucide="map-pin" class="location-icon"></i>
           <select aria-label="Select location">
             <option>Kathmandu</option>
             <option>Lalitpur</option>
@@ -75,18 +78,20 @@
 
         <div class="topbar-right">
           <button type="button" class="icon-btn" aria-label="Notifications">
-            <span class="icon icon-bell" aria-hidden="true"></span>
+            <i data-lucide="bell"></i>
           </button>
+
           <div class="user">
             <span class="avatar">SG</span>
             <span class="user-name">Safal Giri</span>
-            <span class="icon icon-chevron chev" aria-hidden="true"></span>
+            <i data-lucide="chevron-down" class="chevron"></i>
           </div>
         </div>
       </header>
 
-      <!-- Content -->
+      <!-- Page content -->
       <main class="content">
+
         <div class="page-head">
           <div>
             <h1>My Profile</h1>
@@ -96,7 +101,7 @@
         </div>
 
         <div class="notice" role="status">
-          <span class="notice-i" aria-hidden="true">i</span>
+          <i data-lucide="info" class="notice-icon"></i>
           <div>
             <strong>You have unsaved changes</strong>
             <p>Review your information, then select Save changes to update your profile.</p>
@@ -143,6 +148,7 @@
             </div>
 
             <hr class="bottom-rule">
+
             <div class="form-actions">
               <span class="validation-note">Changes are saved after validation.</span>
               <div class="buttons">
@@ -165,10 +171,12 @@
             </section>
 
             <section class="card privacy-card">
-              <span class="icon icon-shield shield" aria-hidden="true"></span>
+              <i data-lucide="shield-check" class="shield"></i>
               <h3>Only you can edit your profile</h3>
               <p class="muted-text">Your personal information stays private. Unauthorized changes are blocked to protect your account.</p>
-              <a href="#" class="link">Need help? Contact support <span aria-hidden="true">→</span></a>
+              <a href="#" class="link">
+                Need help? Contact support <i data-lucide="arrow-right" class="link-icon"></i>
+              </a>
             </section>
           </div>
 
@@ -176,5 +184,11 @@
       </main>
     </div>
   </div>
+
+  <!-- Lucide icons (version pinned so icons don't change unexpectedly) -->
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>
