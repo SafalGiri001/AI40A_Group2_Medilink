@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forgot password | MediLink</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><img class="logo" src="images/logo.jpeg" alt="MediLink Logo">MediLink</a>
+    <a class="help" href="contact.html">Need help?</a>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="badge lock" aria-hidden="true"></div>
+      <h1>Forgot your password?</h1>
+      <p class="sub">Enter your email address and we'll send you a 6-digit code.</p>
+
+      <form id="forgotForm" novalidate>
+        <label for="email">Email address</label>
+        <input id="email" class="i-mail" type="email" placeholder="Enter your email address" autocomplete="email">
+
+        <p id="msg" role="alert"></p>
+        <button class="primary" type="submit">Send reset code</button>
+      </form>
+
+      <p class="foot">Remembered it? <a href="login-page.html">Back to log in</a></p>
+    </section>
+    <p class="secure">Your health information stays private and secure.</p>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 MediLink. All rights reserved.</span>
+    <span><a href="privacy.html">Privacy policy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms of use</a></span>
+  </footer>
+
+  <script src="auth.js"></script>
+</body>
+</html>

@@ -28,14 +28,14 @@ function requireLogin() {                         // call this on every protecte
   const expired = Date.now() - last > TIMEOUT_MINUTES * 60 * 1000;
   if (!sessionStorage.getItem("user") || expired) {
     sessionStorage.clear();
-    location.href = "login.html";
+    location.href = "login-page.html";
     return;
   }
   ["click", "keydown", "mousemove"].forEach(e =>
     document.addEventListener(e, () => sessionStorage.setItem("lastActive", Date.now())));
   setInterval(requireLogin, 30000);
 }
-function logout() { sessionStorage.clear(); location.href = "login.html"; }
+function logout() { sessionStorage.clear(); location.href = "login-page.html"; }
 
 // ---------- login page ----------
 const form = document.getElementById("loginForm");
@@ -47,6 +47,10 @@ if (form) {
     const show = pw.type === "password";
     pw.type = show ? "text" : "password";
     e.currentTarget.classList.toggle("on", show);
+    if (window.lucide) {                           // swap the eye icon on the login-page.html design
+      e.currentTarget.innerHTML = '<i data-lucide="' + (show ? "eye" : "eye-off") + '"></i>';
+      lucide.createIcons();
+    }
   };
 
   form.onsubmit = async e => {
@@ -122,7 +126,7 @@ if (signupForm) {
     }
     msg.className = "ok";
     msg.textContent = "Account created! Redirecting to login...";
-    setTimeout(() => (location.href = "login.html"), 1200);
+    setTimeout(() => (location.href = "login-page.html"), 1200);
   };
 }
 
@@ -140,7 +144,7 @@ if (mfaForm) {
   const demo = document.getElementById("demoCode");
   const pending = () => JSON.parse(sessionStorage.getItem("mfa") || "null");
 
-  if (!pending()) location.href = "login.html";   // nothing to verify
+  if (!pending()) location.href = "login-page.html";   // nothing to verify
   else demo.textContent = pending().code;         // DEMO ONLY: a real app emails or texts this code
 
   document.getElementById("resend").onclick = e => {
@@ -163,8 +167,68 @@ if (mfaForm) {
     }
     p.tries += 1;
     logEvent("Wrong MFA code for " + p.email);
-    if (p.tries >= 3) { sessionStorage.removeItem("mfa"); location.href = "login.html"; return; }
+    if (p.tries >= 3) { sessionStorage.removeItem("mfa"); location.href = "login-page.html"; return; }
     sessionStorage.setItem("mfa", JSON.stringify(p));
     msg.textContent = "Wrong code. " + (3 - p.tries) + " tries left.";
+  };
+}
+
+// ---------- forgot password: reset CODE only ----------
+// This part sends and checks the code. Setting the new password is a separate page (reset-password.html).
+function sendResetCode(email) {
+  const exists = !!read("users", {})[email];
+  const code = String(crypto.getRandomValues(new Uint32Array(1))[0] % 1000000).padStart(6, "0");
+  // Same behaviour whether or not the email exists, so nobody can discover which emails have accounts.
+  sessionStorage.setItem("reset", JSON.stringify({
+    email, code: exists ? code : null, expires: Date.now() + 5 * 60000, tries: 0 }));
+  logEvent("Password reset requested for " + email);
+  return exists ? code : "------";
+}
+
+const forgotForm = document.getElementById("forgotForm");
+if (forgotForm) {
+  const msg = document.getElementById("msg");
+  forgotForm.onsubmit = e => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    if (!/^\S+@\S+\.\S+$/.test(email)) return (msg.textContent = "Enter a valid email address.");
+    sendResetCode(email);
+    location.href = "reset-code.html";
+  };
+}
+
+const codeForm = document.getElementById("codeForm");
+if (codeForm) {
+  const msg = document.getElementById("msg");
+  const demo = document.getElementById("demoCode");
+  const pending = () => JSON.parse(sessionStorage.getItem("reset") || "null");
+
+  if (!pending()) location.href = "forgot.html";
+  else demo.textContent = pending().code || "------";   // DEMO ONLY: a real app emails this code
+
+  document.getElementById("resend").onclick = e => {
+    e.preventDefault();
+    demo.textContent = sendResetCode(pending().email);
+    msg.className = "ok"; msg.textContent = "New code sent.";
+  };
+
+  codeForm.onsubmit = e => {
+    e.preventDefault();
+    const p = pending();
+    const entered = document.getElementById("code").value.trim();
+    msg.className = "";
+
+    if (Date.now() > p.expires) return (msg.textContent = "Code expired. Send a new code.");
+    if (p.code && entered === p.code) {
+      sessionStorage.removeItem("reset");
+      sessionStorage.setItem("resetVerified", p.email);   // the new-password page reads this
+      location.href = "reset-password.html";              // next page (built by the teammate who owns it)
+      return;
+    }
+    p.tries += 1;
+    logEvent("Wrong reset code for " + p.email);
+    if (p.tries >= 3) { sessionStorage.removeItem("reset"); location.href = "forgot.html"; return; }
+    sessionStorage.setItem("reset", JSON.stringify(p));
+    msg.textContent = "Invalid code. " + (3 - p.tries) + " tries left.";
   };
 }
