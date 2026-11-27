@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enter code | MediLink</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><img class="logo" src="images/logo.jpeg" alt="MediLink Logo">MediLink</a>
+    <a class="help" href="contact.html">Need help?</a>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="badge lock" aria-hidden="true"></div>
+      <h1>Enter your code</h1>
+      <p class="sub">Enter the 6-digit code we sent to your email.</p>
+
+      <p class="demo">Demo code: <strong id="demoCode">------</strong></p>
+
+      <form id="codeForm" novalidate>
+        <label for="code">Reset code</label>
+        <input id="code" class="code" type="text" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="one-time-code">
+
+        <p id="msg" role="alert"></p>
+        <button class="primary" type="submit">Verify code</button>
+      </form>
+
+      <p class="foot">Didn't get a code? <a href="#" id="resend">Send a new code</a></p>
+    </section>
+    <p class="secure">Your health information stays private and secure.</p>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 MediLink. All rights reserved.</span>
+    <span><a href="privacy.html">Privacy policy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms of use</a></span>
+  </footer>
+
+  <script src="auth.js"></script>
+</body>
+</html>
