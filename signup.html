@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign up | MediLink</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="logo"></span>MediLink</a>
+    <a class="help" href="contact.html">Need help?</a>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="badge" aria-hidden="true"></div>
+      <h1>Create your account</h1>
+      <p class="sub">Join MediLink to manage your health, all in one place.</p>
+
+      <form id="signupForm" novalidate>
+        <label for="name">Full name</label>
+        <input id="name" class="i-user" type="text" placeholder="Enter your full name" autocomplete="name">
+
+        <label for="email">Email address</label>
+        <input id="email" class="i-mail" type="email" placeholder="Enter your email address" autocomplete="email">
+
+        <label for="password">Password</label>
+        <input id="password" class="i-key" type="password" placeholder="At least 8 characters" autocomplete="new-password">
+
+        <label for="confirm">Confirm password</label>
+        <input id="confirm" class="i-key" type="password" placeholder="Re-enter your password" autocomplete="new-password">
+
+        <label class="check"><input type="checkbox" id="mfa"> Turn on two-step verification (optional)</label>
+
+        <p id="msg" role="alert"></p>
+        <button class="primary" type="submit">Sign up</button>
+      </form>
+
+      <p class="foot">Already have an account? <a href="login-page.html">Log in</a></p>
+    </section>
+    <p class="secure">Your health information stays private and secure.</p>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 MediLink. All rights reserved.</span>
+    <span><a href="privacy.html">Privacy policy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms of use</a></span>
+  </footer>
+
+  <script src="auth.js"></script>
+</body>
+</html>
