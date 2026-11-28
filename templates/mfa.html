@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Verify | MediLink</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="index.html"><img class="logo" src="images/logo.jpeg" alt="MediLink Logo">MediLink</a>
-    <a class="help" href="contact.html">Need help?</a>
+    <a class="brand" href="{{ url_for('profile') }}"><img class="logo" src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="MediLink Logo">MediLink</a>
+    <a class="help" href="{{ url_for('about') }}#contact">Need help?</a>
   </header>
 
   <main>
@@ -35,9 +35,9 @@
 
   <footer>
     <span>&copy; 2026 MediLink. All rights reserved.</span>
-    <span><a href="privacy.html">Privacy policy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms of use</a></span>
+    <span><a href="{{ url_for('privacy') }}">Privacy policy</a> &nbsp;&middot;&nbsp; <a href="{{ url_for('terms') }}">Terms of use</a></span>
   </footer>
 
-  <script src="auth.js"></script>
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
 </body>
 </html>

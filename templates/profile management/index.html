@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Profile | MediLink</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pm_style.css') }}">
 </head>
 <body>
 
@@ -12,8 +12,8 @@
 
     <!-- ===== Sidebar ===== -->
     <aside class="sidebar">
-      <a href="#" class="brand">
-        <img src="medilink logo.png" alt="MediLink logo" class="brand-logo">
+      <a href="{{ url_for('home') }}" class="brand">
+        <img src="{{ url_for('static', filename='images/Medilink logo.png') }}" alt="MediLink logo" class="brand-logo">
         <span class="brand-name">MediLink</span>
       </a>
 
@@ -54,7 +54,7 @@
           <i data-lucide="user"></i>
           <span>Profile</span>
         </a>
-        <a href="#" class="nav-item muted">
+        <a href="{{ url_for('login') }}" class="nav-item muted">
           <i data-lucide="log-out"></i>
           <span>Logout</span>
         </a>

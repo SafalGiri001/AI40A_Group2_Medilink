@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Terms of Use — MediLink</title>
-  <link rel="icon" type="image/png" href="images/logo.png" />
-  <link rel="stylesheet" href="legal.css" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/legal.css') }}" />
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <div class="page-wrapper">
     <header class="top-header">
-      <a href="homepage.html" class="brand" aria-label="MediLink Home">
-        <img src="images/logo.png" alt="MediLink Logo" class="brand-logo" />
+      <a href="{{ url_for('home') }}" class="brand" aria-label="MediLink Home">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MediLink Logo" class="brand-logo" />
         <span class="brand-name">MediLink</span>
       </a>
 
       <nav class="header-nav" aria-label="Secondary Navigation">
-        <a href="homepage.html" class="header-link">Home</a>
-        <a href="about.html" class="header-link">About</a>
-        <a href="login-page.html" class="header-link">Log in</a>
+        <a href="{{ url_for('home') }}" class="header-link">Home</a>
+        <a href="{{ url_for('about') }}" class="header-link">About</a>
+        <a href="{{ url_for('login') }}" class="header-link">Log in</a>
       </nav>
     </header>
 
@@ -40,7 +40,7 @@
         <section class="legal-section">
           <h2>1. Acceptance of Terms</h2>
           <p>
-            By accessing or creating an account on MediLink, you agree to follow these Terms of Use and our <a href="privacy-policy.html" class="inline-link">Privacy Policy</a>. If you do not agree, please discontinue use of the platform.
+            By accessing or creating an account on MediLink, you agree to follow these Terms of Use and our <a href="{{ url_for('privacy') }}" class="inline-link">Privacy Policy</a>. If you do not agree, please discontinue use of the platform.
           </p>
         </section>
 
@@ -84,8 +84,8 @@
         <hr class="doc-divider" />
 
         <div class="doc-footer-note">
-          <span>Learn how we protect your uploaded reports and profile data in our <a href="privacy-policy.html" class="inline-link">Privacy Policy</a>.</span>
-          <a href="homepage.html" class="inline-link">Return to Home →</a>
+          <span>Learn how we protect your uploaded reports and profile data in our <a href="{{ url_for('privacy') }}" class="inline-link">Privacy Policy</a>.</span>
+          <a href="{{ url_for('home') }}" class="inline-link">Return to Home →</a>
         </div>
       </article>
     </main>
@@ -93,9 +93,9 @@
     <footer class="page-footer">
       <p class="copyright">© 2026 MediLink. All rights reserved.</p>
       <nav class="footer-links" aria-label="Legal">
-        <a href="privacy-policy.html">Privacy policy</a>
+        <a href="{{ url_for('privacy') }}">Privacy policy</a>
         <span class="dot" aria-hidden="true">·</span>
-        <a href="terms-of-use.html" class="active-footer">Terms of use</a>
+        <a href="{{ url_for('terms') }}" class="active-footer">Terms of use</a>
       </nav>
     </footer>
   </div>

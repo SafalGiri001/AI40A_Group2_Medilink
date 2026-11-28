@@ -28,14 +28,14 @@ function requireLogin() {                         // call this on every protecte
   const expired = Date.now() - last > TIMEOUT_MINUTES * 60 * 1000;
   if (!sessionStorage.getItem("user") || expired) {
     sessionStorage.clear();
-    location.href = "login-page.html";
+    location.href = "/login";
     return;
   }
   ["click", "keydown", "mousemove"].forEach(e =>
     document.addEventListener(e, () => sessionStorage.setItem("lastActive", Date.now())));
   setInterval(requireLogin, 30000);
 }
-function logout() { sessionStorage.clear(); location.href = "login-page.html"; }
+function logout() { sessionStorage.clear(); location.href = "/login"; }
 
 // ---------- login page ----------
 const form = document.getElementById("loginForm");
@@ -76,7 +76,7 @@ if (form) {
       delete fails[email]; write("fails", fails);
       if (read("mfaUsers", {})[email]) { startMfa(email); return; }   // MFA enabled -> code page
       startSession(email);
-      location.href = "index.html";               // change to your dashboard page
+      location.href = "/profile";               // change to your dashboard page
       return;
     }
 
@@ -126,7 +126,7 @@ if (signupForm) {
     }
     msg.className = "ok";
     msg.textContent = "Account created! Redirecting to login...";
-    setTimeout(() => (location.href = "login-page.html"), 1200);
+    setTimeout(() => (location.href = "/login"), 1200);
   };
 }
 
@@ -136,7 +136,7 @@ function newCode(email) {
   sessionStorage.setItem("mfa", JSON.stringify({ email, code, expires: Date.now() + 5 * 60000, tries: 0 }));
   return code;
 }
-function startMfa(email) { newCode(email); location.href = "mfa.html"; }
+function startMfa(email) { newCode(email); location.href = "/mfa"; }
 
 const mfaForm = document.getElementById("mfaForm");
 if (mfaForm) {
@@ -144,7 +144,7 @@ if (mfaForm) {
   const demo = document.getElementById("demoCode");
   const pending = () => JSON.parse(sessionStorage.getItem("mfa") || "null");
 
-  if (!pending()) location.href = "login-page.html";   // nothing to verify
+  if (!pending()) location.href = "/login";   // nothing to verify
   else demo.textContent = pending().code;         // DEMO ONLY: a real app emails or texts this code
 
   document.getElementById("resend").onclick = e => {
@@ -162,12 +162,12 @@ if (mfaForm) {
     if (entered === p.code) {
       sessionStorage.removeItem("mfa");
       startSession(p.email);
-      location.href = "index.html";               // change to your dashboard page
+      location.href = "/profile";               // change to your dashboard page
       return;
     }
     p.tries += 1;
     logEvent("Wrong MFA code for " + p.email);
-    if (p.tries >= 3) { sessionStorage.removeItem("mfa"); location.href = "login-page.html"; return; }
+    if (p.tries >= 3) { sessionStorage.removeItem("mfa"); location.href = "/login"; return; }
     sessionStorage.setItem("mfa", JSON.stringify(p));
     msg.textContent = "Wrong code. " + (3 - p.tries) + " tries left.";
   };
@@ -193,7 +193,7 @@ if (forgotForm) {
     const email = document.getElementById("email").value.trim().toLowerCase();
     if (!/^\S+@\S+\.\S+$/.test(email)) return (msg.textContent = "Enter a valid email address.");
     sendResetCode(email);
-    location.href = "reset-code.html";
+    location.href = "/reset-code";
   };
 }
 
@@ -203,7 +203,7 @@ if (codeForm) {
   const demo = document.getElementById("demoCode");
   const pending = () => JSON.parse(sessionStorage.getItem("reset") || "null");
 
-  if (!pending()) location.href = "forgot.html";
+  if (!pending()) location.href = "/forgot-password";
   else demo.textContent = pending().code || "------";   // DEMO ONLY: a real app emails this code
 
   document.getElementById("resend").onclick = e => {
@@ -222,12 +222,12 @@ if (codeForm) {
     if (p.code && entered === p.code) {
       sessionStorage.removeItem("reset");
       sessionStorage.setItem("resetVerified", p.email);   // the new-password page reads this
-      location.href = "reset-password.html";              // next page (built by the teammate who owns it)
+      location.href = "/reset-password";              // next page (built by the teammate who owns it)
       return;
     }
     p.tries += 1;
     logEvent("Wrong reset code for " + p.email);
-    if (p.tries >= 3) { sessionStorage.removeItem("reset"); location.href = "forgot.html"; return; }
+    if (p.tries >= 3) { sessionStorage.removeItem("reset"); location.href = "/forgot-password"; return; }
     sessionStorage.setItem("reset", JSON.stringify(p));
     msg.textContent = "Invalid code. " + (3 - p.tries) + " tries left.";
   };

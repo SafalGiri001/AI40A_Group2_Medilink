@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MediLink Log-In</title>
-    <link rel="icon" type="image/jpeg" href="images/logo.png" />
-    <link rel="stylesheet" href="login-page.css">
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='images/logo.png') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login-page.css') }}">
 </head>
 <body class="page-wrapper">
     <header class="top-header">
-        <a href="homepage.html" class="logo">
+        <a href="{{ url_for('home') }}" class="logo">
             <span class="logo-image">
-                <img src="images/logo.jpeg" alt="MediLink Logo">
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="MediLink Logo">
             </span>
             <span class="logo-text">MediLink</span>
         </a>
@@ -63,7 +63,7 @@
     <input type="checkbox" />
     <span>Remember me</span>
   </label>
-  <a href="forgot.html" class="forgot-link">Forgot password?</a>
+  <a href="{{ url_for('forgot_password') }}" class="forgot-link">Forgot password?</a>
 </div>
 
 <!-- Error message (used by auth.js) -->
@@ -74,7 +74,7 @@
 <hr class="divider" />
 
 <p class="signup-text">
-  Don't have an account? <a href="signup.html" class="signup-link">Sign up</a>
+  Don't have an account? <a href="{{ url_for('signup') }}" class="signup-link">Sign up</a>
 </p>
 </form>
 
@@ -85,9 +85,9 @@
     <footer class="page-footer">
   <span>© 2026 MediLink. All rights reserved.</span>
   <div class="footer-links">
-    <a href="#privacy">Privacy policy</a>
+    <a href="{{ url_for('privacy') }}">Privacy policy</a>
     <span>·</span>
-    <a href="#terms">Terms of use</a>
+    <a href="{{ url_for('terms') }}">Terms of use</a>
   </div>
 </footer>
 
@@ -95,6 +95,6 @@
         <script>
             lucide.createIcons();
         </script>
-    <script src="auth.js"></script>
+    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
 </body>
 </html>

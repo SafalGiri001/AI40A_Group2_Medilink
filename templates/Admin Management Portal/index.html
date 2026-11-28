@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MediLink Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ap_style.css') }}">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
@@ -14,7 +14,7 @@
 
         <header class="header">
             <div class="header-brand">
-                <img src="../images/medilink.jpeg" alt="MediLink Logo" class="logo-img">
+                <img src="{{ url_for('static', filename='images/medilink.jpeg') }}" alt="MediLink Logo" class="logo-img">
                 <div>
                     <h1>Admin Management Portal</h1>
 <p>MediLink Healthcare Administration System</p>
@@ -197,7 +197,7 @@
 
     </div>
 
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='js/style.js') }}"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
         <script>
             lucide.createIcons();
