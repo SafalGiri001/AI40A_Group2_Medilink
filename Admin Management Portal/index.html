@@ -1,206 +1,208 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MediLink Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="dashboard">
+      <header class="header">
+        <div class="header-brand">
+          <img
+            src="../images/medilink.jpeg"
+            alt="MediLink Logo"
+            class="logo-img"
+          />
+          <div>
+            <h1>Admin Management Portal</h1>
+            <p>MediLink Healthcare Administration System</p>
+          </div>
+        </div>
 
-        <header class="header">
-            <div class="header-brand">
-                <img src="../images/medilink.jpeg" alt="MediLink Logo" class="logo-img">
-                <div>
-                    <h1>Admin Management Portal</h1>
-<p>MediLink Healthcare Administration System</p>
-                </div>
+        <div class="admin">
+          <div class="admin-icon">S</div>
+          <span>Safal</span>
+        </div>
+      </header>
+
+      <section class="welcome">
+        <div>
+          <h2>Welcome to MediLink Administration!</h2>
+          <p>
+            Manage users, healthcare services, medical content and platform
+            operations from one place.
+          </p>
+        </div>
+        <p id="current-date"></p>
+      </section>
+
+      <section class="stats">
+        <div class="stat-card">
+          <div class="card-icon">
+            <i data-lucide="users"></i>
+          </div>
+
+          <a
+            href="totalusers.html"
+            class="stat-card"
+            style="text-decoration: none; color: inherit"
+          >
+            <div class="stat-title">Total Users</div>
+            <div class="stat-value">2,480</div>
+            <div class="stat-sub">Registered users</div>
+          </a>
+        </div>
+
+        <div class="stat-card">
+          <div class="card-icon">
+            <i data-lucide="hospital"></i>
+          </div>
+          <p>Hospitals</p>
+          <h2>85</h2>
+          <small>Listed hospitals</small>
+        </div>
+
+        <div class="stat-card">
+          <div class="card-icon">
+            <i data-lucide="clipboard-plus"></i>
+          </div>
+          <p>Doctors</p>
+          <h2>320</h2>
+          <small>Listed doctors</small>
+        </div>
+
+        <div class="stat-card">
+          <div class="card-icon">
+            <i data-lucide="file-text"></i>
+          </div>
+          <p>Medical Reports</p>
+          <h2>1,250</h2>
+          <small>Uploaded reports</small>
+        </div>
+      </section>
+
+      <section class="main-grid">
+        <div class="content-box">
+          <h3>Platform Overview</h3>
+          <p class="description">Monthly platform activity</p>
+
+          <div class="chart">
+            <div class="chart-item">
+              <div class="bar" style="height: 45%"></div>
+              <span>Jan</span>
             </div>
 
-            <div class="admin">
-                <div class="admin-icon">S</div>
-                <span>Safal</span>
-            </div>
-        </header>
-
-        <section class="welcome">
-            <div>
-                <h2>Welcome to MediLink Administration!</h2>
-<p>Manage users, healthcare services, medical content and platform operations from one place.</p>
-            </div>
-            <p id="current-date"></p>
-        </section>
-
-        <section class="stats">
-
-            <div class="stat-card">
-                <div class="card-icon">
-    <i data-lucide="users"></i>
-</div>
-                <p>Total Users</p>
-                <h2>2,480</h2>
-                <small>Registered users</small>
+            <div class="chart-item">
+              <div class="bar" style="height: 65%"></div>
+              <span>Feb</span>
             </div>
 
-            <div class="stat-card">
-                <div class="card-icon">
-    <i data-lucide="hospital"></i>
-</div>
-                <p>Hospitals</p>
-                <h2>85</h2>
-                <small>Listed hospitals</small>
+            <div class="chart-item">
+              <div class="bar" style="height: 55%"></div>
+              <span>Mar</span>
             </div>
 
-            <div class="stat-card">
-                <div class="card-icon">
-    <i data-lucide="clipboard-plus"></i>
-</div>
-                <p>Doctors</p>
-                <h2>320</h2>
-                <small>Listed doctors</small>
+            <div class="chart-item">
+              <div class="bar" style="height: 80%"></div>
+              <span>Apr</span>
             </div>
 
-            <div class="stat-card">
-                <div class="card-icon">
-    <i data-lucide="file-text"></i>
-</div>
-                <p>Medical Reports</p>
-                <h2>1,250</h2>
-                <small>Uploaded reports</small>
+            <div class="chart-item">
+              <div class="bar" style="height: 70%"></div>
+              <span>May</span>
             </div>
 
-        </section>
-
-        <section class="main-grid">
-
-            <div class="content-box">
-                <h3>Platform Overview</h3>
-                <p class="description">Monthly platform activity</p>
-
-                <div class="chart">
-
-                    <div class="chart-item">
-                        <div class="bar" style="height: 45%;"></div>
-                        <span>Jan</span>
-                    </div>
-
-                    <div class="chart-item">
-                        <div class="bar" style="height: 65%;"></div>
-                        <span>Feb</span>
-                    </div>
-
-                    <div class="chart-item">
-                        <div class="bar" style="height: 55%;"></div>
-                        <span>Mar</span>
-                    </div>
-
-                    <div class="chart-item">
-                        <div class="bar" style="height: 80%;"></div>
-                        <span>Apr</span>
-                    </div>
-
-                    <div class="chart-item">
-                        <div class="bar" style="height: 70%;"></div>
-                        <span>May</span>
-                    </div>
-
-                    <div class="chart-item">
-                        <div class="bar" style="height: 95%;"></div>
-                        <span>Jun</span>
-                    </div>
-
-                </div>
+            <div class="chart-item">
+              <div class="bar" style="height: 95%"></div>
+              <span>Jun</span>
             </div>
+          </div>
+        </div>
 
-            <div class="content-box">
-                <h3>Quick Overview</h3>
-                <p class="description">Platform information</p>
+        <div class="content-box">
+          <h3>Quick Overview</h3>
+          <p class="description">Platform information</p>
 
-                <div class="overview-item">
-                    <span>Active Users</span>
-                    <strong>2,310</strong>
-                </div>
+          <div class="overview-item">
+            <span>Active Users</span>
+            <strong>2,310</strong>
+          </div>
 
-                <div class="overview-item">
-                    <span>Pending Registrations</span>
-                    <strong>24</strong>
-                </div>
+          <div class="overview-item">
+            <span>Pending Registrations</span>
+            <strong>24</strong>
+          </div>
 
-                <div class="overview-item">
-                    <span>Emergency Contacts</span>
-                    <strong>156</strong>
-                </div>
+          <div class="overview-item">
+            <span>Emergency Contacts</span>
+            <strong>156</strong>
+          </div>
 
-                <div class="overview-item">
-                    <span>Health Records</span>
-                    <strong>890</strong>
-                </div>
-            </div>
+          <div class="overview-item">
+            <span>Health Records</span>
+            <strong>890</strong>
+          </div>
+        </div>
+      </section>
 
-        </section>
+      <section class="content-box recent-section">
+        <h3>Recent User Registrations</h3>
+        <p class="description">Latest users who joined MediLink</p>
 
-        <section class="content-box recent-section">
-            <h3>Recent User Registrations</h3>
-            <p class="description">Latest users who joined MediLink</p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>User Name</th>
+                <th>Email Address</th>
+                <th>Registration Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
 
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>User Name</th>
-                            <th>Email Address</th>
-                            <th>Registration Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
+            <tbody>
+              <tr>
+                <td>Aarav Sharma</td>
+                <td>aarav@example.com</td>
+                <td>23 Nov 2026</td>
+                <td><span class="active">Active</span></td>
+              </tr>
 
-                    <tbody>
-                        <tr>
-                            <td>Aarav Sharma</td>
-                            <td>aarav@example.com</td>
-                            <td>23 Nov 2026</td>
-                            <td><span class="active">Active</span></td>
-                        </tr>
+              <tr>
+                <td>Sita Thapa</td>
+                <td>sita@example.com</td>
+                <td>22 Nov 2026</td>
+                <td><span class="active">Active</span></td>
+              </tr>
 
-                        <tr>
-                            <td>Sita Thapa</td>
-                            <td>sita@example.com</td>
-                            <td>22 Nov 2026</td>
-                            <td><span class="active">Active</span></td>
-                        </tr>
+              <tr>
+                <td>Rohan Karki</td>
+                <td>rohan@example.com</td>
+                <td>21 Nov 2026</td>
+                <td><span class="pending">Pending</span></td>
+              </tr>
 
-                        <tr>
-                            <td>Rohan Karki</td>
-                            <td>rohan@example.com</td>
-                            <td>21 Nov 2026</td>
-                            <td><span class="pending">Pending</span></td>
-                        </tr>
+              <tr>
+                <td>Priya Gurung</td>
+                <td>priya@example.com</td>
+                <td>20 Nov 2026</td>
+                <td><span class="active">Active</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-                        <tr>
-                            <td>Priya Gurung</td>
-                            <td>priya@example.com</td>
-                            <td>20 Nov 2026</td>
-                            <td><span class="active">Active</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <footer>
-            © 2026 MediLink. All rights reserved.
-        </footer>
-
+      <footer>© 2026 MediLink. All rights reserved.</footer>
     </div>
 
     <script src="script.js"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
-        <script>
-            lucide.createIcons();
-        </script>
-</body>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
 </html>

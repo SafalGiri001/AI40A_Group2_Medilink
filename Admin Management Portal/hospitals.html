@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hospitals Management - MediLink Admin Portal</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: #f3f6fa;
+      color: #1e293b;
+      padding: 24px 40px;
+    }
+
+    /* Top Header (Matches Admin Portal) */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .brand h1 {
+      font-size: 22px;
+      color: #133b6b;
+      font-weight: 700;
+    }
+
+    .brand p {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .admin-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: #133b6b;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #134b8a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* Back Link & Blue Banner */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #134b8a;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .banner {
+      background: #134b8a;
+      color: #fff;
+      padding: 24px 30px;
+      border-radius: 12px;
+      margin-bottom: 22px;
+    }
+
+    .banner h2 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .banner p {
+      font-size: 13px;
+      color: #dbeafe;
+    }
+
+    /* 4 Summary Stat Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .stat-card .label {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .stat-card .num {
+      font-size: 28px;
+      font-weight: 700;
+      color: #133b6b;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .hint {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* Hospitals Table Card */
+    .table-card {
+      background: #fff;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filters input,
+    .filters select {
+      padding: 9px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    .filters input {
+      width: 260px;
+    }
+
+    .btn-primary {
+      background: #134b8a;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #0f3b6e;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
+      background: #f8fafc;
+      color: #475569;
+      padding: 12px 14px;
+      font-size: 13px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    td {
+      padding: 14px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge.Active {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge.Pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .btn-action {
+      background: #eff6ff;
+      color: #134b8a;
+      border: 1px solid #bfdbfe;
+      padding: 5px 11px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 6px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    .modal-box {
+      background: #fff;
+      width: 450px;
+      max-width: 92%;
+      padding: 24px;
+      border-radius: 12px;
+    }
+
+    .modal-box h3 {
+      color: #133b6b;
+      margin-bottom: 14px;
+    }
+
+    .row-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
+    }
+
+    .form-field {
+      margin-bottom: 12px;
+    }
+
+    .form-field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 4px;
+    }
+
+    .form-field input,
+    .form-field select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <img src="images/medilink.jpeg" alt="MediLink Logo" />
+      <div>
+        <h1>Admin Management Portal</h1>
+        <p>MediLink Healthcare Administration System</p>
+      </div>
+    </div>
+    <div class="admin-badge">
+      <div class="avatar">S</div>
+      <span>Safal</span>
+    </div>
+  </header>
+
+  <a href="index.html" class="back-link">← Back to Dashboard</a>
+
+  <section class="banner">
+    <h2>Hospitals Management</h2>
+    <p>View, verify, and manage all registered hospitals, bed capacities, and specialties.</p>
+  </section>
+
+  <section class="stats-grid">
+    <div class="stat-card">
+      <div class="label">Total Hospitals</div>
+      <div class="num" id="totalHospitalsCount">85</div>
+      <div class="hint">Listed hospitals</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Verified Active</div>
+      <div class="num" id="activeHospitalsCount">72</div>
+      <div class="hint">Operational facilities</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Pending Approval</div>
+      <div class="num" id="pendingHospitalsCount">13</div>
+      <div class="hint">Awaiting verification</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Total Beds</div>
+      <div class="num" id="totalBedsCount">12,450</div>
+      <div class="hint">Across listed facilities</div>
+    </div>
+  </section>
+
+  <section class="table-card">
+    <div class="toolbar">
+      <div class="filters">
+        <input type="text" id="searchInput" placeholder="Search hospital, location, or specialty..." oninput="renderHospitals()" />
+        <select id="cityFilter" onchange="renderHospitals()">
+          <option value="All">All Locations</option>
+          <option value="Kathmandu">Kathmandu</option>
+          <option value="Lalitpur">Lalitpur</option>
+          <option value="Bhaktapur">Bhaktapur</option>
+        </select>
+        <select id="statusFilter" onchange="renderHospitals()">
+          <option value="All">All Status</option>
+          <option value="Active">Active</option>
+          <option value="Pending">Pending</option>
+        </select>
+      </div>
+      <button class="btn-primary" onclick="openAddModal()">+ Add Hospital</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Hospital Name</th>
+          <th>Location</th>
+          <th>Specialties</th>
+          <th>Beds</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="hospitalsTableBody"></tbody>
+    </table>
+  </section>
+
+  <!-- View Hospital Modal -->
+  <div class="modal" id="viewModal" onclick="if(event.target === this) this.style.display='none'">
+    <div class="modal-box">
+      <h3 id="viewHospitalName">Hospital Details</h3>
+      <div id="viewHospitalBody"></div>
+      <button class="btn-primary" style="width:100%; margin-top:16px;" onclick="document.getElementById('viewModal').style.display='none'">Close</button>
+    </div>
+  </div>
+
+  <!-- Add Hospital Modal -->
+  <div class="modal" id="addModal" onclick="if(event.target === this) this.style.display='none'">
+    <div class="modal-box">
+      <h3>Add New Hospital</h3>
+      <form onsubmit="addHospital(event)">
+        <div class="form-field">
+          <label>Hospital Name</label>
+          <input type="text" id="hospNameInput" required placeholder="e.g., Grande International Hospital" />
+        </div>
+        <div class="form-field">
+          <label>City</label>
+          <select id="hospCityInput">
+            <option value="Kathmandu">Kathmandu</option>
+            <option value="Lalitpur">Lalitpur</option>
+            <option value="Bhaktapur">Bhaktapur</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Area / Address</label>
+          <input type="text" id="hospAddressInput" required placeholder="e.g., Tokha, Kathmandu" />
+        </div>
+        <div class="form-field">
+          <label>Specialties</label>
+          <input type="text" id="hospSpecInput" required placeholder="e.g., Cardiology, Neurology, ER" />
+        </div>
+        <div class="form-field">
+          <label>Beds</label>
+          <input type="number" id="hospBedsInput" required value="150" min="1" />
+        </div>
+        <div style="display:flex; gap:10px; margin-top:14px;">
+          <button type="submit" class="btn-primary" style="flex:1;">Save Hospital</button>
+          <button type="button" class="btn-action" onclick="document.getElementById('addModal').style.display='none'">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let hospitals = [
+      { id: 1, name: "Grande International Hospital", city: "Kathmandu", location: "Tokha, Kathmandu", specialties: "Cardiology, Neurology, ER", beds: 200, contact: "+977-1-5159266", status: "Active" },
+      { id: 2, name: "Norvic International Hospital", city: "Kathmandu", location: "Thapathali, Kathmandu", specialties: "Cardiology, Critical Care", beds: 150, contact: "+977-1-5970032", status: "Active" },
+      { id: 3, name: "TU Teaching Hospital (TUTH)", city: "Kathmandu", location: "Maharajgunj, Kathmandu", specialties: "Multi-specialty, Trauma", beds: 700, contact: "+977-1-4412303", status: "Active" },
+      { id: 4, name: "Patan Hospital", city: "Lalitpur", location: "Lagankhel, Lalitpur", specialties: "General Medicine, Maternity", beds: 450, contact: "+977-1-5522295", status: "Active" },
+      { id: 5, name: "Alka Hospital", city: "Lalitpur", location: "Jawalakhel, Lalitpur", specialties: "Nephrology, General Surgery", beds: 120, contact: "+977-1-5555555", status: "Pending" }
+    ];
+
+    function renderHospitals() {
+      const search = document.getElementById("searchInput").value.trim().toLowerCase();
+      const city = document.getElementById("cityFilter").value;
+      const status = document.getElementById("statusFilter").value;
+
+      const filtered = hospitals.filter(h => {
+        const matchesSearch =
+          h.name.toLowerCase().includes(search) ||
+          h.location.toLowerCase().includes(search) ||
+          h.specialties.toLowerCase().includes(search);
+        const matchesCity = city === "All" || h.city === city;
+        const matchesStatus = status === "All" || h.status === status;
+        return matchesSearch && matchesCity && matchesStatus;
+      });
+
+      const tbody = document.getElementById("hospitalsTableBody");
+      if (!filtered.length) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#64748b;">No hospitals found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(h => `
+        <tr>
+          <td><strong>${h.name}</strong></td>
+          <td>${h.location}</td>
+          <td>${h.specialties}</td>
+          <td>${h.beds}</td>
+          <td><span class="badge ${h.status}">${h.status}</span></td>
+          <td>
+            <button class="btn-action" onclick="viewHospital(${h.id})">View</button>
+            ${h.status === "Pending" ? `<button class="btn-action" onclick="approveHospital(${h.id})">Approve</button>` : ""}
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function viewHospital(id) {
+      const h = hospitals.find(item => item.id === id);
+      if (!h) return;
+      document.getElementById("viewHospitalName").textContent = h.name;
+      document.getElementById("viewHospitalBody").innerHTML = `
+        <div class="row-item"><span>Hospital ID</span><strong>HSP-${String(h.id).padStart(3, "0")}</strong></div>
+        <div class="row-item"><span>Location</span><strong>${h.location}</strong></div>
+        <div class="row-item"><span>Specialties</span><strong>${h.specialties}</strong></div>
+        <div class="row-item"><span>Total Beds</span><strong>${h.beds}</strong></div>
+        <div class="row-item"><span>Contact</span><strong>${h.contact}</strong></div>
+        <div class="row-item"><span>Status</span><strong>${h.status}</strong></div>
+      `;
+      document.getElementById("viewModal").style.display = "flex";
+    }
+
+    function approveHospital(id) {
+      const h = hospitals.find(item => item.id === id);
+      if (h) {
+        h.status = "Active";
+        renderHospitals();
+      }
+    }
+
+    function openAddModal() {
+      document.getElementById("addModal").style.display = "flex";
+    }
+
+    function addHospital(e) {
+      e.preventDefault();
+      const name = document.getElementById("hospNameInput").value.trim();
+      const city = document.getElementById("hospCityInput").value;
+      const address = document.getElementById("hospAddressInput").value.trim();
+      const specialties = document.getElementById("hospSpecInput").value.trim();
+      const beds = parseInt(document.getElementById("hospBedsInput").value, 10) || 50;
+
+      hospitals.unshift({
+        id: hospitals.length + 1,
+        name,
+        city,
+        location: address,
+        specialties,
+        beds,
+        contact: "+977-1-4000000",
+        status: "Pending"
+      });
+
+      e.target.reset();
+      document.getElementById("addModal").style.display = "none";
+      renderHospitals();
+    }
+
+    renderHospitals();
+  </script>
+</body>
+</html>

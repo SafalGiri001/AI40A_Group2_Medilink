@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Management - MediLink Admin Portal</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: #f3f6fa;
+      color: #1e293b;
+      padding: 24px 40px;
+    }
+
+    /* Top Header (Matches Admin Portal) */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .brand h1 {
+      font-size: 22px;
+      color: #133b6b;
+      font-weight: 700;
+    }
+
+    .brand p {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .admin-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: #133b6b;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #134b8a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* Back Link & Blue Banner */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #134b8a;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .banner {
+      background: #134b8a;
+      color: #fff;
+      padding: 24px 30px;
+      border-radius: 12px;
+      margin-bottom: 22px;
+    }
+
+    .banner h2 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .banner p {
+      font-size: 13px;
+      color: #dbeafe;
+    }
+
+    /* 4 Summary Stat Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .stat-card .label {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .stat-card .num {
+      font-size: 28px;
+      font-weight: 700;
+      color: #133b6b;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .hint {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* Users Table Card */
+    .table-card {
+      background: #fff;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filters input,
+    .filters select {
+      padding: 9px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    .filters input {
+      width: 260px;
+    }
+
+    .btn-primary {
+      background: #134b8a;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #0f3b6e;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
+      background: #f8fafc;
+      color: #475569;
+      padding: 12px 14px;
+      font-size: 13px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    td {
+      padding: 14px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge.Active {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge.Pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .btn-action {
+      background: #eff6ff;
+      color: #134b8a;
+      border: 1px solid #bfdbfe;
+      padding: 5px 11px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 6px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    .modal-box {
+      background: #fff;
+      width: 440px;
+      max-width: 92%;
+      padding: 24px;
+      border-radius: 12px;
+    }
+
+    .modal-box h3 {
+      color: #133b6b;
+      margin-bottom: 14px;
+    }
+
+    .row-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
+    }
+
+    .form-field {
+      margin-bottom: 12px;
+    }
+
+    .form-field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 4px;
+    }
+
+    .form-field input,
+    .form-field select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <img src="images/medilink.jpeg" alt="MediLink Logo" />
+      <div>
+        <h1>Admin Management Portal</h1>
+        <p>MediLink Healthcare Administration System</p>
+      </div>
+    </div>
+    <div class="admin-badge">
+      <div class="avatar">S</div>
+      <span>Safal</span>
+    </div>
+  </header>
+
+  <a href="index.html" class="back-link">← Back to Dashboard</a>
+
+  <section class="banner">
+    <h2>User Management</h2>
+    <p>View, manage, and verify registered platform users, patients, and healthcare staff.</p>
+  </section>
+
+  <section class="stats-grid">
+    <div class="stat-card">
+      <div class="label">Total Users</div>
+      <div class="num" id="totalUsersCount">2,480</div>
+      <div class="hint">Registered users</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Active Users</div>
+      <div class="num" id="activeUsersCount">2,310</div>
+      <div class="hint">Verified accounts</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Pending Registrations</div>
+      <div class="num" id="pendingUsersCount">24</div>
+      <div class="hint">Awaiting approval</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">New This Month</div>
+      <div class="num">+142</div>
+      <div class="hint">Recent signups</div>
+    </div>
+  </section>
+
+  <section class="table-card">
+    <div class="toolbar">
+      <div class="filters">
+        <input type="text" id="searchInput" placeholder="Search by name or email..." oninput="renderUsers()" />
+        <select id="roleFilter" onchange="renderUsers()">
+          <option value="All">All Roles</option>
+          <option value="Patient">Patient</option>
+          <option value="Doctor">Doctor</option>
+          <option value="Hospital Admin">Hospital Admin</option>
+        </select>
+        <select id="statusFilter" onchange="renderUsers()">
+          <option value="All">All Status</option>
+          <option value="Active">Active</option>
+          <option value="Pending">Pending</option>
+        </select>
+      </div>
+      <button class="btn-primary" onclick="openAddModal()">+ Add New User</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>Email Address</th>
+          <th>Role</th>
+          <th>Registration Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="usersTableBody"></tbody>
+    </table>
+  </section>
+
+  <!-- View User Modal -->
+  <div class="modal" id="viewModal" onclick="if(event.target === this) this.style.display='none'">
+    <div class="modal-box">
+      <h3 id="viewUserName">User Details</h3>
+      <div id="viewUserBody"></div>
+      <button class="btn-primary" style="width:100%; margin-top:16px;" onclick="document.getElementById('viewModal').style.display='none'">Close</button>
+    </div>
+  </div>
+
+  <!-- Add User Modal -->
+  <div class="modal" id="addModal" onclick="if(event.target === this) this.style.display='none'">
+    <div class="modal-box">
+      <h3>Add New User</h3>
+      <form onsubmit="addUser(event)">
+        <div class="form-field">
+          <label>Full Name</label>
+          <input type="text" id="userNameInput" required placeholder="e.g., Bikash Adhikari" />
+        </div>
+        <div class="form-field">
+          <label>Email Address</label>
+          <input type="email" id="userEmailInput" required placeholder="e.g., bikash@example.com" />
+        </div>
+        <div class="form-field">
+          <label>Role</label>
+          <select id="userRoleInput">
+            <option value="Patient">Patient</option>
+            <option value="Doctor">Doctor</option>
+            <option value="Hospital Admin">Hospital Admin</option>
+          </select>
+        </div>
+        <div style="display:flex; gap:10px; margin-top:14px;">
+          <button type="submit" class="btn-primary" style="flex:1;">Save User</button>
+          <button type="button" class="btn-action" onclick="document.getElementById('addModal').style.display='none'">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let users = [
+      { id: 1, name: "Aarav Sharma", email: "aarav@example.com", role: "Patient", date: "23 Nov 2026", phone: "+977-9841000001", status: "Active" },
+      { id: 2, name: "Sita Thapa", email: "sita@example.com", role: "Patient", date: "22 Nov 2026", phone: "+977-9841000002", status: "Active" },
+      { id: 3, name: "Rohan Karki", email: "rohan@example.com", role: "Hospital Admin", date: "21 Nov 2026", phone: "+977-9841000003", status: "Pending" },
+      { id: 4, name: "Priya Gurung", email: "priya@example.com", role: "Doctor", date: "20 Nov 2026", phone: "+977-9841000004", status: "Active" }
+    ];
+
+    function renderUsers() {
+      const search = document.getElementById("searchInput").value.trim().toLowerCase();
+      const role = document.getElementById("roleFilter").value;
+      const status = document.getElementById("statusFilter").value;
+
+      const filtered = users.filter(u => {
+        const matchesSearch = u.name.toLowerCase().includes(search) || u.email.toLowerCase().includes(search);
+        const matchesRole = role === "All" || u.role === role;
+        const matchesStatus = status === "All" || u.status === status;
+        return matchesSearch && matchesRole && matchesStatus;
+      });
+
+      const tbody = document.getElementById("usersTableBody");
+      if (!filtered.length) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#64748b;">No users found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(u => `
+        <tr>
+          <td><strong>${u.name}</strong></td>
+          <td>${u.email}</td>
+          <td>${u.role}</td>
+          <td>${u.date}</td>
+          <td><span class="badge ${u.status}">${u.status}</span></td>
+          <td>
+            <button class="btn-action" onclick="viewUser(${u.id})">View</button>
+            ${u.status === "Pending" ? `<button class="btn-action" onclick="approveUser(${u.id})">Approve</button>` : ""}
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function viewUser(id) {
+      const u = users.find(item => item.id === id);
+      if (!u) return;
+      document.getElementById("viewUserName").textContent = u.name;
+      document.getElementById("viewUserBody").innerHTML = `
+        <div class="row-item"><span>User ID</span><strong>USR-${String(u.id).padStart(3, "0")}</strong></div>
+        <div class="row-item"><span>Email</span><strong>${u.email}</strong></div>
+        <div class="row-item"><span>Role</span><strong>${u.role}</strong></div>
+        <div class="row-item"><span>Phone</span><strong>${u.phone}</strong></div>
+        <div class="row-item"><span>Registered</span><strong>${u.date}</strong></div>
+        <div class="row-item"><span>Status</span><strong>${u.status}</strong></div>
+      `;
+      document.getElementById("viewModal").style.display = "flex";
+    }
+
+    function approveUser(id) {
+      const u = users.find(item => item.id === id);
+      if (u) {
+        u.status = "Active";
+        renderUsers();
+      }
+    }
+
+    function openAddModal() {
+      document.getElementById("addModal").style.display = "flex";
+    }
+
+    function addUser(e) {
+      e.preventDefault();
+      const name = document.getElementById("userNameInput").value.trim();
+      const email = document.getElementById("userEmailInput").value.trim();
+      const role = document.getElementById("userRoleInput").value;
+
+      users.unshift({
+        id: users.length + 1,
+        name,
+        email,
+        role,
+        date: "27 Nov 2026",
+        phone: "+977-9800000000",
+        status: "Pending"
+      });
+
+      e.target.reset();
+      document.getElementById("addModal").style.display = "none";
+      renderUsers();
+    }
+
+    renderUsers();
+  </script>
+</body>
+</html>
